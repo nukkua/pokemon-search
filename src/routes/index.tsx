@@ -16,12 +16,8 @@ export default component$(() => {
     pokemonId.value += value;
   });
 
-  const togglePokemonOrientation = $(( ) => {
-    if (showBackImage.value) {
-      showBackImage.value = false;
-    } else {
-      showBackImage.value = true;
-    }
+  const togglePokemonOrientation = $(() => {
+    showBackImage.value = !showBackImage.value;
   });
   return (
     <>
