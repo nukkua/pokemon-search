@@ -5,6 +5,8 @@ import { PokemonImage } from "~/components/pokemons/pokemon-image";
 export default component$(() => {
   const pokemonId = useSignal<number>(1); // Para primitivos, valores bools, strings, numbers
   const showBackImage = useSignal<boolean>(false);
+
+
   // const pokemonId2 = useStore(1); Para arreglos y objetos
   // A continuacion se ve como puedo hacer funciones serializadas de qwik que seria
   // funciones que se tienen lazy loading ya que las disparare cuando se haga click en el boton

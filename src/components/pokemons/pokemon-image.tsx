@@ -1,5 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 
+// import { type Signal } from "@builder.io/qwik"
+// Tambien puedo recibir como prop la signal definiendo el interface Props de la siguiente forma
+// id: Signal<number>
+
 interface Props {
   id: number;
   size?: number;
@@ -16,7 +20,7 @@ export const PokemonImage = component$(
     }
     return (
       <>
-        <img
+        <img width="96" height="96"
           src={urlImage}
           alt="Pokemon Image"
           style={{ width: `${size}px` }}
