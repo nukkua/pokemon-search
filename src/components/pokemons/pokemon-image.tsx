@@ -8,11 +8,12 @@ interface Props {
   id: number;
   size?: number;
   backImage?: boolean;
+  isVisible?: boolean;
 }
 
 export const PokemonImage = component$(
-  ({ id, size = 200, backImage = false }: Props) => {
-    const imageLoaded = useSignal<boolean>(false);
+  ({ id, size = 200, backImage = false, isVisible = false }: Props) => {
+    const imageLoaded = useSignal(false);
 
     // Tipo el effect o derived, solo que no es magico como en svelte la reactividad aqui le digo
     // que trackee cierto valor cuando cambie,  si cambia ese valor hago esto disparo esto.
@@ -43,9 +44,13 @@ export const PokemonImage = component$(
           onLoad$={() => {
             imageLoaded.value = true;
           }}
-          class={{
-            'hidden': !imageLoaded.value,
-          }}
+          class={[
+            {
+              hidden: !imageLoaded.value,
+              "brightness-0": isVisible,
+            },
+            "transition-all",
+          ]}
         />
       </div>
     );

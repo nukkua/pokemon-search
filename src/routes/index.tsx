@@ -6,6 +6,7 @@ export default component$(() => {
   const pokemonId = useSignal<number>(1); // Para primitivos, valores bools, strings, numbers
   const showBackImage = useSignal<boolean>(false);
 
+  const revealPokemon = useSignal<boolean>(true);
 
   // const pokemonId2 = useStore(1); Para arreglos y objetos
   // A continuacion se ve como puedo hacer funciones serializadas de qwik que seria
@@ -21,12 +22,16 @@ export default component$(() => {
   const togglePokemonOrientation = $(() => {
     showBackImage.value = !showBackImage.value;
   });
+
+  const makePokemonVisible = $(() => {
+    revealPokemon.value = !revealPokemon.value;
+  });
   return (
     <>
       <span class="text-2xl">Buscador simple</span>
       <span class="text-9xl">{pokemonId}</span>
 
-      <PokemonImage id={pokemonId.value} backImage={showBackImage.value} />
+      <PokemonImage id={pokemonId.value} backImage={showBackImage.value} isVisible={revealPokemon.value} />
       <div class="mt-2">
         <button
           onClick$={() => changePokemonId(-1)}
@@ -45,6 +50,13 @@ export default component$(() => {
           class="btn btn-primary mr-2"
         >
           Voltear
+        </button>
+
+        <button
+          onClick$={() => makePokemonVisible()}
+          class="btn btn-primary mr-2"
+        >
+          Revelar
         </button>
       </div>
     </>
