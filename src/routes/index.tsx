@@ -1,5 +1,5 @@
 import { component$, useSignal, $ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { useNavigate, type DocumentHead } from "@builder.io/qwik-city";
 import { PokemonImage } from "~/components/pokemons/pokemon-image";
 
 export default component$(() => {
@@ -7,6 +7,9 @@ export default component$(() => {
   const showBackImage = useSignal<boolean>(false);
 
   const revealPokemon = useSignal<boolean>(true);
+
+  const nav = useNavigate(); // useNavigate usado como la <Link href="/"> pero el useNavigate nos va a ayudar
+  // a usar ssr, por lo tanto la funcion goToPokemon puede ser async/await
 
   // const pokemonId2 = useStore([]); Para arreglos y objetos
   // A continuacion se ve como puedo hacer funciones serializadas de qwik que seria
@@ -26,12 +29,27 @@ export default component$(() => {
   const makePokemonVisible = $(() => {
     revealPokemon.value = !revealPokemon.value;
   });
+
+  const goToPokemon = $((id: number) => {
+    nav(`/pokemon/${id}`);
+  });
   return (
     <>
       <span class="text-2xl">Buscador simple</span>
       <span class="text-9xl">{pokemonId}</span>
 
-      <PokemonImage id={pokemonId.value} backImage={showBackImage.value} isVisible={revealPokemon.value} />
+      <div
+        onClick$={() => {
+          goToPokemon(pokemonId.value);
+        }}
+      >
+        <PokemonImage
+          id={pokemonId.value}
+          backImage={showBackImage.value}
+          isVisible={revealPokemon.value}
+        />
+      </div>
+
       <div class="mt-2">
         <button
           onClick$={() => changePokemonId(-1)}
