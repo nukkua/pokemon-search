@@ -13,7 +13,7 @@ interface Props {
 
 export const PokemonImage = component$(
   ({ id, size = 200, backImage = false, isVisible = false }: Props) => {
-    const imageLoaded = useSignal(false);
+    const imageLoaded = useSignal<boolean>(false);
 
     // Tipo el effect o derived, solo que no es magico como en svelte la reactividad aqui le digo
     // que trackee cierto valor cuando cambie,  si cambia ese valor hago esto disparo esto.
@@ -21,8 +21,8 @@ export const PokemonImage = component$(
       track(() => id);
       imageLoaded.value = false;
     });
-
     let urlImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
     if (backImage) {
       urlImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`;
     } else {
