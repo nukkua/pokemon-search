@@ -8,7 +8,7 @@ export default component$(() => {
 
   const revealPokemon = useSignal<boolean>(true);
 
-  // const pokemonId2 = useStore(1); Para arreglos y objetos
+  // const pokemonId2 = useStore([]); Para arreglos y objetos
   // A continuacion se ve como puedo hacer funciones serializadas de qwik que seria
   // funciones que se tienen lazy loading ya que las disparare cuando se haga click en el boton
   // y el boton renderizara cosas de forma perezosa
