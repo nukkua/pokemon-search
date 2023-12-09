@@ -5,14 +5,14 @@ import { component$, useTask$, useSignal } from "@builder.io/qwik";
 // id: Signal<number>
 
 interface Props {
-  id: number;
+  id: number | string;
   size?: number;
   backImage?: boolean;
   isVisible?: boolean;
 }
 
 export const PokemonImage = component$(
-  ({ id, size = 200, backImage = false, isVisible = false }: Props) => {
+  ({ id, size = 200, backImage = false, isVisible = true }: Props) => {
     const imageLoaded = useSignal<boolean>(false);
 
     // Tipo el effect o derived, solo que no es magico como en svelte la reactividad aqui le digo
@@ -47,7 +47,7 @@ export const PokemonImage = component$(
           class={[
             {
               hidden: !imageLoaded.value,
-              "brightness-0": isVisible,
+              "brightness-0": !isVisible,
             },
             "transition-all",
           ]}
